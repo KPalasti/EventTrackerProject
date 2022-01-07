@@ -3,8 +3,10 @@
 ## Overview
 
 ### REST API
+Go to http://44.224.50.229:8080/LiftTracker/api/lifts
 
 ### HTML/JAVASCRIPT Front End
+Go to http://44.224.50.229:8080/LiftTracker/index.html
 
 ### Angular Front End
 
