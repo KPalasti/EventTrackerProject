@@ -1,1 +1,3 @@
 rootProject.name = 'LiftTracker'
+
+includeFlat 'JPALifts'
