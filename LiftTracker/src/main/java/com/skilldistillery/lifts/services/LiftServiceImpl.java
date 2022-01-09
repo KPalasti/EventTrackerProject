@@ -21,27 +21,29 @@ public class LiftServiceImpl implements LiftService {
 	}
 
 	@Override
-	public Lift getLiftById(int liftId) {
-		return null;
-	}
-
-	@Override
-	public Lift addLift(int liftId, Lift lift) {
+	public Lift addLift(Lift lift) {
 		
-		return null;
+		return liftRepo.save(lift);
 	}
 
 	@Override
-	public boolean deleteLift(int liftId) {
-		// TODO Auto-generated method stub
-		return false;
+	public void deleteLift(int liftId) {
+		liftRepo.deleteById(liftId);
 	}
 
 	@Override
 	public Lift updateLift(int liftId, Lift lift) {
-		// TODO Auto-generated method stub
+		lift.setId(liftId);
+		if(liftRepo.existsById(liftId)) {
+			
+			return liftRepo.saveAndFlush(lift);
+		}
 		return null;
 	}
-	
+
+	@Override
+	public Lift getLiftById(int liftId) {
+        return liftRepo.findById(liftId);
+	}	
 
 }

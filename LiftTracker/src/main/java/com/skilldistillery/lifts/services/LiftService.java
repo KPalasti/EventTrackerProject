@@ -6,9 +6,9 @@ import com.skilldistillery.lifts.entities.Lift;
 
 public interface LiftService {
 
-	List<Lift> getAllLifts();
-	Lift getLiftById(int liftId);
-	boolean deleteLift(int liftId);
-	Lift addLift(int liftId, Lift lift);
-	Lift updateLift(int liftId, Lift lift);
+	public List<Lift> getAllLifts();
+	public Lift getLiftById(int liftId);
+	public void deleteLift(int liftId);
+	public Lift addLift(Lift lift);
+	public Lift updateLift(int liftId, Lift lift);
 }

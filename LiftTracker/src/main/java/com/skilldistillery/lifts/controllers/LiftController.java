@@ -1,10 +1,7 @@
 package com.skilldistillery.lifts.controllers;
 
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-
 import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,35 +29,30 @@ public class LiftController {
 		return liftSvc.getAllLifts();
 	}
 	
-	@PostMapping("lifts/{liftId}")
-	public Lift addLift(@PathVariable Integer liftId,
-			@RequestBody Lift lift,
-			HttpServletResponse res,
-			HttpServletRequest req) {
-		lift = liftSvc.addLift(liftId, lift);
-		if(lift == null) {
-			res.setStatus(404);
+	@GetMapping("lifts/{liftId}")
+	public Lift getLiftById(@PathVariable Integer liftId) {
+		return liftSvc.getLiftById(liftId);
+	}
+	
+	@PostMapping("lifts")
+	public Lift addLift(@RequestBody Lift lift,
+			HttpServletResponse res) {
+		Lift newLift = liftSvc.addLift(lift);
+		if(newLift !=null) {
+			res.setStatus(201);
 		}
 		else {
-			res.setStatus(201);
-			StringBuffer url = req.getRequestURL();
-			url.append("/").append(lift.getId());
-			res.setHeader("Location", url.toString());
+			res.setStatus(404);
 		}
-		return lift;
+		return newLift;
 	}
 	
 	@DeleteMapping("lifts/{liftId}")
 	public void deleteLift(
-			@PathVariable Integer liftId,
-			HttpServletResponse res) {
-		if(liftSvc.deleteLift(liftId)) {
-			res.setStatus(204);
-		}
-		else {
-			res.setStatus(404);
-		}
+			@PathVariable Integer liftId) {
+		liftSvc.deleteLift(liftId);
 	}
+	
 	
 	@PutMapping("lifts/{liftId}")
 	public Lift replaceLift(
@@ -68,15 +60,15 @@ public class LiftController {
 			@RequestBody Lift lift,
 			HttpServletResponse res) {
 		try {
-			post = postDao.update(postId, post);
-			if(post == null) {
+			lift = liftSvc.updateLift(liftId, lift);
+			if(lift == null) {
 				res.setStatus(404);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 			res.setStatus(400);
-			post = null;
+			lift = null;
 		}
-		return post;
+		return lift;
 	}
 }
