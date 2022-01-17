@@ -1,6 +1,6 @@
 console.log("script.js loaded");
 
-window.addEventListener('load', function(e) {
+window.addEventListener('load', function(e) {	
 	console.log('document loaded');
 	console.log('testing from atom');
 	init();
@@ -111,3 +111,5 @@ function createLift(newLift){
 	xhr.setRequestHeader('Content-type', 'application/json');
 	xhr.send(JSON.stringify(newLift));
 }
+
+

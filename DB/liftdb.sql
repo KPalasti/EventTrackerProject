@@ -62,8 +62,8 @@ DROP TABLE IF EXISTS `favorite_lifts` ;
 
 CREATE TABLE IF NOT EXISTS `favorite_lifts` (
   `id` INT NOT NULL AUTO_INCREMENT,
-  `user_id` INT NOT NULL,
-  `lift_id` INT NOT NULL,
+  `user_id` INT NULL,
+  `lift_id` INT NULL,
   PRIMARY KEY (`id`),
   INDEX `fk_favorite_lifts_user1_idx` (`user_id` ASC),
   INDEX `fk_favorite_lifts_lift1_idx` (`lift_id` ASC),

@@ -1,12 +1,12 @@
 package com.skilldistillery.lifts.services;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.skilldistillery.lifts.entities.Lift;
+import com.skilldistillery.lifts.entities.User;
 import com.skilldistillery.lifts.repositories.LiftRepository;
 
 @Service
@@ -22,8 +22,9 @@ public class LiftServiceImpl implements LiftService {
 
 	@Override
 	public Lift addLift(Lift lift) {
-		
-		return liftRepo.save(lift);
+		User user = new User();
+		user.setId(1);
+		return liftRepo.saveAndFlush(lift);
 	}
 
 	@Override

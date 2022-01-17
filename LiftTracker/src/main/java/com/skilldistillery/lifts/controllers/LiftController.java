@@ -30,8 +30,13 @@ public class LiftController {
 	}
 	
 	@GetMapping("lifts/{liftId}")
-	public Lift getLiftById(@PathVariable Integer liftId) {
-		return liftSvc.getLiftById(liftId);
+	public Lift getLiftById(@PathVariable Integer liftId,
+			HttpServletResponse res) {
+		Lift lift = liftSvc.getLiftById(liftId);
+		if(lift == null) {
+			res.setStatus(404);
+		}
+		return lift;
 	}
 	
 	@PostMapping("lifts")
@@ -40,9 +45,6 @@ public class LiftController {
 		Lift newLift = liftSvc.addLift(lift);
 		if(newLift !=null) {
 			res.setStatus(201);
-		}
-		else {
-			res.setStatus(404);
 		}
 		return newLift;
 	}
