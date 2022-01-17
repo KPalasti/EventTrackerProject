@@ -16,6 +16,21 @@ CREATE SCHEMA IF NOT EXISTS `liftdb` DEFAULT CHARACTER SET utf8 ;
 USE `liftdb` ;
 
 -- -----------------------------------------------------
+-- Table `lift`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `lift` ;
+
+CREATE TABLE IF NOT EXISTS `lift` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `name` VARCHAR(150) NOT NULL,
+  `weight` INT NULL,
+  `total_sets` INT NULL,
+  `total_reps` INT NULL,
+  PRIMARY KEY (`id`))
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
 -- Table `user`
 -- -----------------------------------------------------
 DROP TABLE IF EXISTS `user` ;
@@ -30,28 +45,6 @@ CREATE TABLE IF NOT EXISTS `user` (
   PRIMARY KEY (`id`),
   UNIQUE INDEX `username_UNIQUE` (`username` ASC),
   UNIQUE INDEX `email_UNIQUE` (`email` ASC))
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
--- Table `lift`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `lift` ;
-
-CREATE TABLE IF NOT EXISTS `lift` (
-  `id` INT NOT NULL AUTO_INCREMENT,
-  `name` VARCHAR(150) NOT NULL,
-  `weight` INT NULL,
-  `total_sets` INT NULL,
-  `total_reps` INT NULL,
-  `user_id` INT NOT NULL,
-  PRIMARY KEY (`id`),
-  INDEX `fk_lift_user1_idx` (`user_id` ASC),
-  CONSTRAINT `fk_lift_user1`
-    FOREIGN KEY (`user_id`)
-    REFERENCES `user` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
@@ -117,23 +110,23 @@ SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
 
 -- -----------------------------------------------------
--- Data for table `user`
+-- Data for table `lift`
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `liftdb`;
-INSERT INTO `user` (`id`, `username`, `password`, `email`, `created_on`, `updated_on`) VALUES (1, 'Kyle', 'pw', 'pw@gmail.com', NULL, NULL);
+INSERT INTO `lift` (`id`, `name`, `weight`, `total_sets`, `total_reps`) VALUES (1, 'Deadlift', 365, 2, 2);
+INSERT INTO `lift` (`id`, `name`, `weight`, `total_sets`, `total_reps`) VALUES (2, 'Squat', 285, 3, 5);
+INSERT INTO `lift` (`id`, `name`, `weight`, `total_sets`, `total_reps`) VALUES (3, 'Overhead Press', 165, 3, 5);
 
 COMMIT;
 
 
 -- -----------------------------------------------------
--- Data for table `lift`
+-- Data for table `user`
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `liftdb`;
-INSERT INTO `lift` (`id`, `name`, `weight`, `total_sets`, `total_reps`, `user_id`) VALUES (1, 'Deadlift', 365, 2, 2, 1);
-INSERT INTO `lift` (`id`, `name`, `weight`, `total_sets`, `total_reps`, `user_id`) VALUES (2, 'Squat', 285, 3, 5, 1);
-INSERT INTO `lift` (`id`, `name`, `weight`, `total_sets`, `total_reps`, `user_id`) VALUES (3, 'Overhead Press', 165, 3, 5, 1);
+INSERT INTO `user` (`id`, `username`, `password`, `email`, `created_on`, `updated_on`) VALUES (1, 'Kyle', 'pw', 'pw@gmail.com', NULL, NULL);
 
 COMMIT;
 

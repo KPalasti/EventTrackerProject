@@ -13,7 +13,8 @@ public class Lift {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
-
+	
+	
 	private String name;
 
 	public Lift() {
