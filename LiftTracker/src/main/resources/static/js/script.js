@@ -13,7 +13,7 @@ function init() {
     event.preventDefault();
     var liftId = document.liftForm.liftId.value;
     if (!isNaN(liftId) && liftId > 0) {
-      getFilm(liftId);
+      getLift(liftId);
     }
   });
 }
@@ -26,10 +26,10 @@ document.newLiftForm.addLift.addEventListener(('click'), function(evt) {
 		name: f.name.value
 	};
 	//newFilm.title = f.title.value; ANOTHER OPTION
-	createFilm(newLift);
+	createLift(newLift);
 });
 
-function getFilm(liftId) {
+function getLift(liftId) {
   // TODO:
   // * Use XMLHttpRequest to perform a GET request to "api/films/"
   //   with the filmId appended.
@@ -92,7 +92,7 @@ function displayLift(lift) {
   //ul.appendChild(li);
 }
 
-function createFilm(newLift){
+function createLift(newLift){
 	console.log(newLift);
 	let xhr = new XMLHttpRequest();
 	xhr.open('POST', 'api/lifts')
@@ -100,7 +100,7 @@ function createFilm(newLift){
 		if(xhr.readyState === 4) {
 			if(xhr.status === 201 || xhr.status === 200){
 				let lift = JSON.parse(xhr.responseText);
-				displayFilm(lift);
+				displayLift(lift);
 			}
 			else {
 				console.error('Lift create failed with status: ' + xhr.status);
