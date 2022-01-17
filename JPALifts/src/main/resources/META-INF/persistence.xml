@@ -5,6 +5,9 @@
 	<provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
 
 	<class>com.skilldistillery.lifts.entities.Lift</class>
+	<class>com.skilldistillery.lifts.entities.LiftRating</class>
+	<class>com.skilldistillery.lifts.entities.FavoriteLifts</class>
+	<class>com.skilldistillery.lifts.entities.User</class>
 
 	<properties>
 		<property name="javax.persistence.jdbc.url"

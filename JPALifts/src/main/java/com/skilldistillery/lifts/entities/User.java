@@ -27,7 +27,7 @@ public class User {
 	
 	@Column(name="updated_on")
 	private LocalDateTime updatedOn;
-
+	
 	public User() {
 		super();
 	}
